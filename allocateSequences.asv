@@ -1,0 +1,18 @@
+function sequences = allocateSequences(dreamPar,sequences)
+%
+% <a href="matlab:web(fullfile(scemroot,'html','prepseqarray.html'),'-helpbrowser')">View HTML documentation for this function in the help browser</a>    
+%
+
+ 
+if dreamPar.reducedSampleCollection
+    TMP = repmat(NaN,[floor(dreamPar.nOffspringPerCompl/dreamPar.reducedSampleFrequency),...
+                           size(sequences,2),...
+                           dreamPar.nCompl]);
+    sequences = cat(1,sequences,TMP);
+else
+    TMP = repmat(NaN,[dreamPar.nOffspringPerCompl,...
+                           size(sequences,2),...
+                           dreamPar.nCompl]);
+    sequences = cat(1,sequences,TMP);
+end
+

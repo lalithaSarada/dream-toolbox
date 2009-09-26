@@ -1,0 +1,22 @@
+function [objStat, logObjStat] = objectivefun(modelResult)
+
+importmeasurements
+
+yMeas = dailyDischarge(objDomainIx,1);
+ySim = modelResult(objDomainIx,1);
+
+
+Lambda = 0.3;
+
+yMeasBoxCox = boxcoxtransform(yMeas,Lambda);
+ySimBoxCox = boxcoxtransform(ySim,Lambda);
+
+Err = yMeasBoxCox(:)-ySimBoxCox(:);
+
+% calculate the sum of squared errors, and change its sign:
+objStat = =-sum(Err.^2);
+logObjStat = objStat;
+
+% figure(6)
+% plot(numTime(objDomainIx),[yMeasBoxCox,ySimBoxCox])
+% drawnow

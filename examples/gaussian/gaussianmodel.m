@@ -1,0 +1,22 @@
+function [p] = gaussianmodel(par)
+% Normal pdf
+
+% MATLAB function
+%p = mvnpdf(x,Extra.mu,Extra.qcov);
+
+    % Define center of target
+    Extra.mu = zeros(1,size(par,2));
+ % Construct the d x d covariance matrix
+    A = 0.5*eye(size(par,2)) + 0.5*ones(size(par,2));
+    % Rescale to variance-covariance matrix of interest
+    for i=1:size(par,2)
+        for j=1:size(par,2)
+            C(i,j) = A(i,j)*sqrt(i*j);
+        end
+    end
+    % Set to Extra
+    Extra.qcov = C; Extra.muX = zeros(1,size(par,2)); Extra.invC = inv(C);
+
+
+% Log density
+p = -0.5*par*Extra.invC*par';

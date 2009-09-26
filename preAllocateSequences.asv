@@ -1,0 +1,15 @@
+function sequences = preAllocateSequences(dreamPar,sequences) 
+if dreamPar.reducedSampleCollection
+    TMP = repmat(NaN,[ceil(/(dreamPar.nSeq*dreamPar.reducedSampleFrequency)),...
+                  size(sequences,2),...
+                  dreamPar.nSeq]);
+else
+    TMP = repmat(NaN,[ceil(dreamPar.nModelEvalsMax/dreamPar.nSeq),...
+                  size(sequences,2),...
+                  dreamPar.nSeq]);
+end
+sequences = cat(1,sequences,TMP);
+
+TMP = nan(dreamPar.nModelEvalsMax, )
+evalResults = cat(1,evalResults,TMP);
+end

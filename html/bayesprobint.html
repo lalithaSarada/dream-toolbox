@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+<head>
+
+   <title>DREAM Toolbox - bayesprobint</title>
+
+   <meta name="keywords" content="bayesprobint">
+
+   <meta name="description" content="bayesprobint">
+
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  
+   <meta name="robots" content="index, follow">
+
+   <meta author="Jurriaan H. Spaaks">
+
+   <link type="text/css" rel="stylesheet" href="styles/dream_styles.css">
+ 
+</head>
+
+
+
+<body>
+<a name="_top"></a>
+
+
+<div class="linkheader">
+<a href="matlab:edit(fullfile(dreamroot,'tools','bayesprobint'))">View source code of the function <span style="font-family:monospace">bayesprobint()</span> in the MATLAB editor</a><br><br>
+<a href="matlab:web(fullfile(dreamroot,'html','contents.html'),'-helpbrowser')">Toolbox contents</a>
+</div>
+
+<div class="spacer">
+</div>
+
+
+
+<div class="h1">
+bayesprobint
+</div>
+
+<div class="h2">
+Syntax
+</div>
+
+<div class="txt">
+<pre>
+Y = bayesprobint(X,arg2,modeStr)
+</pre>
+</div>
+
+<div class="h2">
+Description
+</div>
+
+<div class="txt">
+<p>
+<span style="font-family:monospace">Y = bayesprobint(X,arg2,modeStr)</span>
+</p>
+<p>
+Calculates Bayesian probability intervals. Variable <span style="font-family:monospace">X</span> should be size NxM, with N rows of model results, each row having M elements. Variable <span style="font-family:monospace">modeStr</span> can be <span style="font-family:monospace">'vec'</span> for output as vector data, or <span style="font-family:monospace">'mat'</span> for output as 2-D matrix. If <span style="font-family:monospace">'vec'</span> is selected, input variable <span style="font-family:monospace">arg2</span> is interpreted as percentiles.  Function <a href="matlab:doc prctile"><span style="font-family:monospace">prctile</span></a> from the statistics toolbox is required in this case. If <span style="font-family:monospace">'mat'</span> is selected, input variable <span style="font-family:monospace">arg2</span> is interpreted as the bin boundaries of the 2-D matrix.
+</p>
+
+</div>
+
+
+<div class="footer">
+</div>
+
+<div class="spacer">
+</div>
+
+
+<a name="_bottom"></a>
+
+
+</body>
+
+</html>

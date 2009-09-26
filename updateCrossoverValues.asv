@@ -1,0 +1,19 @@
+function [pCR,lCR] = updateCrossoverValues(dreamPar,CR,deltaTot,lCR)
+% Updates the probabilities of the various crossover values
+
+% Make CR to be a single vector
+CR = CR(:);
+
+% Determine lCR
+for val = 1:dreamPar.nCrossoverValues,
+    % Determine how many times a particular CR value is used
+    idx = find(CR==val/dreamPar.nCrossoverValues);
+    % This is used to weight deltaTot
+    lCR(1,val) = lCR(1,val) + size(idx,1);    
+end;
+
+% Adapt pCR using information from averaged normalized jumping distance
+pCR = dreamPar.nSeq * (deltaTot./lCR) / sum(deltaTot);
+
+% Normalize pCR
+pCR = pCR./sum(pCR);

@@ -1,0 +1,55 @@
+
+
+clear
+close all
+clc
+
+
+% define which parameters should be included in the optimization
+% and generate a map of where each entry of 'parVec' fits in the 
+% model structure under consideration.
+[dreamPar.parMap,dreamPar.parMapTex,...
+    dreamPar.rangeMin,dreamPar.rangeMax] = assignpars; 
+
+% define which model parameters are not included in the optimization:
+assignconstants
+dreamPar.constNames = modelConstantsNames;
+
+% % % % % % % % % % % % % 
+
+
+
+dreamPar.modelCallStr = 'modelResult = hymod(parVec);';
+dreamPar.objCallStr = '[objScore,logObjScore] = objectivefun(modelResult);';
+dreamPar.optMethod = 3; %'error minimization';
+dreamPar.measNames = {'dailyDischarge','objDomainIx','numTime'};
+dreamPar.nMeasurements = numel(objDomainIx);
+dreamPar.drawInterval = 1;
+dreamPar.visualizationCall = 'visualization2';
+dreamPar.nModelEvalsMax =  5000+5; %3e4;
+% dreamPar.convMaxDiff = 1/Inf;
+dreamPar.nCrossoverValues =3;
+dreamPar.nDiffEvolPairs = 1;                    
+dreamPar.nOffspringPerSeq = 10;                   
+dreamPar.crossoverValuesTuning = true;
+dreamPar.randomError = 2e-1;                     % Random error for ergodicity
+dreamPar.outlierTest = 'IQR_test';       
+dreamPar.reducedSampleCollection = false; 
+dreamPar.boundHandling = 'Reflect';
+dreamPar.samplingMethod = 'uniform';
+  
+
+
+[evalResults,critGelRub,outliers,sequences,acceptanceRate, pCrossoverHistory, dreamPar] = dream(dreamPar);
+
+% save('dream_hymod.mat')
+% 
+% bestIx = find(evalResults(:,dreamPar.objCol)==max(evalResults(:,dreamPar.objCol)));
+% bestUniParSets = unique(evalResults(bestIx,dreamPar.parCols),'rows');
+% 
+% 
+% for k=5:9
+%     figure(k)
+%     hist(evalResults(3000:end,dreamPar.parCols(k-4)),15)
+%     title(dreamPar.parMapTex{k-4})
+% end

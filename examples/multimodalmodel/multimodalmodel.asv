@@ -1,0 +1,16 @@
+function s = bimodalmodel(par)
+
+ % Provide information to do alternative sampling
+    Extra.muX = zeros(1,MCMCPar.n);         % Provide mean of initial sample
+    Extra.qcov = eye(MCMCPar.n);            % Initial covariance
+
+    Extra.Lam = eye(MCMCPar.n);             % covariance
+    Extra.mu1 = -5 * ones(1,MCMCPar.n);     % center point of first density
+    Extra.mu2 =  5 * ones(1,MCMCPar.n);     % center point of second density
+    Extra.sigma = eye(MCMCPar.n);           % define the std of the target
+    
+% Forward call
+p = 1/3 * mvnpdf(par,Extra.mu1,Extra.sigma) + 2/3 * mvnpdf(par,Extra.mu2,Extra.sigma);
+
+%p = mvnpdf(x,Extra.mu,Extra.qcov); ---> (log_density): p =
+%-0.5*x*Extra.invC*x';

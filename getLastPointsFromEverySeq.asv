@@ -1,0 +1,9 @@
+function  lastPointsFromEverySeq = getLastPointsFromEverySeq(sequences)
+
+lastPointsFromEverySeq = nan(dreamPar.nSeq,
+for iSeq=1:scemPar.nSeq
+    curSeq = sequences(:,:,iSeq);
+    maxIter = max(curSeq(:,dreamPar.iterCol));
+    lastEvalRow = curSeq(:,dreamPar.iterCol)==maxIter;
+    lastPointFromSeq = curSeq(lastEvalRow,dreamPar.parCols);
+end
